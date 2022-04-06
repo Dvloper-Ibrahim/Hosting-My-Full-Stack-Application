@@ -1,1 +1,1 @@
-cd www/ && eb deploy && cd ..
+cd www && eb deploy && cd ..
