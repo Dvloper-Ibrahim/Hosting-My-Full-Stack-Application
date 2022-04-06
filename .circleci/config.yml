@@ -33,7 +33,7 @@ jobs:
           name: Build Frontend
           command: |
             npm run build-frontend
-  deploy_the backend:
+  deploy_the_backend:
     docker:
     # the base image can run most needed actions with orbs
       - image: "cimg/base:stable"
@@ -55,7 +55,7 @@ jobs:
                     name: deploy Backend
                     command: |
                       npm run deploy-backend
-  deploy_the frontend:
+  deploy_the_frontend:
     docker:
     # the base image can run most needed actions with orbs
       - image: "cimg/base:stable"
@@ -73,6 +73,9 @@ workflows:
   Build_And_Deploy:
     jobs:
       - build
-      - deploy:
+      - deploy_the_backend:
           requires:
             - build
+      - deploy_the_frontend:
+          requires:
+            - deploy_the_backend
