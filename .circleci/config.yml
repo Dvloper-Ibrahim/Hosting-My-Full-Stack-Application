@@ -5,6 +5,7 @@ orbs:
   # aws-cli: circleci/aws-cli@1.3.1
   node: circleci/node@5.0.1
   aws-cli: circleci/aws-cli@2.1.0
+  eb: circleci/aws-elastic-beanstalk@2.0.1
   # different jobs are calles later in the workflows sections
 jobs:
   build:
@@ -33,6 +34,28 @@ jobs:
           name: Build Frontend
           command: |
             npm run build-frontend
+  # deploy_the_backend:
+  #   docker:
+  #   # the base image can run most needed actions with orbs
+  #     - image: "cimg/base:stable"
+  #   steps:
+  #     - node/install
+  #     - checkout
+  #     - aws-cli/setup
+  #     - node/with-cache:
+  #         steps:
+  #           - run:
+  #               name: Installing deployment dependencies
+  #               command: |
+  #                 sudo apt-get -y -qq update
+  #                 sudo apt-get install python-pip python-dev build-essential
+  #                 sudo pip install --upgrade setuptools
+  #                 sudo pip install awsebcli --upgrade
+  #           # deploy back-end & front-end
+  #           - run:
+  #               name: deploy Backend
+  #               command: |
+  #                 npm run deploy-backend
   deploy_the_backend:
     docker:
     # the base image can run most needed actions with orbs
@@ -40,21 +63,11 @@ jobs:
     steps:
       - node/install
       - checkout
-      - aws-cli/setup
-      - node/with-cache:
-          steps:
-            - run:
-                name: Installing deployment dependencies
-                command: |
-                  sudo apt-get -y -qq update
-                  sudo apt-get install python-pip python-dev build-essential
-                  sudo pip install --upgrade setuptools
-                  sudo pip install awsebcli --upgrade
-            # deploy back-end & front-end
-            - run:
-                name: deploy Backend
-                command: |
-                  npm run deploy-backend
+      - eb/setup
+      - run:
+          name: deploy Backend
+          command: |
+            npm run deploy-backend
   deploy_the_frontend:
     docker:
     # the base image can run most needed actions with orbs
