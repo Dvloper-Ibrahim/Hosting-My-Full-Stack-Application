@@ -9,7 +9,12 @@ export class AppPage {
     return browser.getTitle();
   }
 
+  // getPageOneTitleText() {
+  //   return element(by.tagName('app-home')).element(by.deepCss('ion-title')).getText();
+  // }
   getPageOneTitleText() {
-    return element(by.tagName('app-home')).element(by.deepCss('ion-title')).getText();
+    return element(by.tagName("app-menubar"))
+        .element(by.css("ion-title"))
+        .getText();
   }
 }
