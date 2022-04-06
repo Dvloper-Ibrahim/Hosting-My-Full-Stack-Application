@@ -33,7 +33,7 @@ jobs:
           name: Build Frontend
           command: |
             npm run build-frontend
-  deploy:
+  deploy_the backend:
     docker:
     # the base image can run most needed actions with orbs
       - image: "cimg/base:stable"
@@ -55,10 +55,19 @@ jobs:
                     name: deploy Backend
                     command: |
                       npm run deploy-backend
-                - run:
-                    name: deploy Frontend
-                    command: |
-                      npm run deploy-frontend
+  deploy_the frontend:
+    docker:
+    # the base image can run most needed actions with orbs
+      - image: "cimg/base:stable"
+    steps:
+      - node/install
+      - checkout
+      - aws-cli/setup
+          - run:
+              name: deploy Frontend
+              command: |
+                npm run deploy-frontend
+
 workflows:
   version: 2
   Build_And_Deploy:
