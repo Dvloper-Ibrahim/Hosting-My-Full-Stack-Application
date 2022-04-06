@@ -1,1 +1,1 @@
-'cd ./www && eb deploy'
+'cd www && eb deploy'
