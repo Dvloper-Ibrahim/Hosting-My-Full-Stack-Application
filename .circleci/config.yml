@@ -63,10 +63,10 @@ jobs:
       - node/install
       - checkout
       - aws-cli/setup
-          - run:
-              name: deploy Frontend
-              command: |
-                npm run deploy-frontend
+      - run:
+          name: deploy Frontend
+          command: |
+            npm run deploy-frontend
 
 workflows:
   version: 2
