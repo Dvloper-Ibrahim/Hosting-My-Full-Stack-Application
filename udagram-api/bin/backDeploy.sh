@@ -1,1 +1,1 @@
-eb deploy
+eb deploy Udagramserver-env
