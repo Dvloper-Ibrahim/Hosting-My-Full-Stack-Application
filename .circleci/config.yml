@@ -67,7 +67,6 @@ jobs:
           name: deploy Frontend
           command: |
             npm run deploy-frontend
-
 workflows:
   version: 2
   Build_And_Deploy:
