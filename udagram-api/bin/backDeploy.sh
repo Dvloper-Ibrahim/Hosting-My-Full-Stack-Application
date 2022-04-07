@@ -1,1 +1,1 @@
-eb deploy Udagramserver-env
+cd www && eb deploy Udagramserver-env
