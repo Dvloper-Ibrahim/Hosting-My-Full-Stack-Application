@@ -38,7 +38,25 @@ jobs:
       #     name: Test Frontend
       #     command: |
       #       npm run test-frontend
-  
+  # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  # End To End Test:
+  # docker:
+  # # the base image can run most needed actions with orbs
+  #   - image: "cimg/base:stable"
+  # steps:
+  #   - node/install
+  #   - checkout
+  #   - eb/setup
+  #   - aws-cli/setup
+  #   - run:
+  #       name: Install Frontend-Packages
+  #       command: |
+  #         npm run install-frontend
+  #   - run:
+  #       name: testing end to end
+  #       command: |
+  #         npm run test-end-to-end
+  # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   # deploy_the_backend:
   #   docker:
   #   # the base image can run most needed actions with orbs
@@ -85,34 +103,30 @@ jobs:
           name: deploy Frontend
           command: |
             npm run deploy-frontend
-  End To End Test:
-    docker:
-    # the base image can run most needed actions with orbs
-      - image: "cimg/base:stable"
-    steps:
-      - node/install
-      - checkout
-      - eb/setup
-      - aws-cli/setup
-      - run:
-          name: Install Frontend-Packages
-          command: |
-            npm run install-frontend
-      - run:
-          name: testing end to end
-          command: |
-            npm run test-end-to-end
+
 workflows:
   version: 2
   Build_And_Deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              only:
+                - master
       - deploy the backend:
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - build
       - deploy the frontend:
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - deploy the backend
-      - End To End Test:
-          requires:
-            - deploy the frontend
+      # - End To End Test:
+      #     requires:
+      #       - deploy the frontend
