@@ -1,0 +1,5 @@
+branch-defaults:
+  master:
+    environment: Udagramserver-env
+global:
+  profile: eb-cli

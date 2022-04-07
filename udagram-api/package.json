@@ -11,7 +11,8 @@
     "clean": "rm -rf www/ || true",
     "build": "npm run clean && tsc && cp -rf src/config www/config && cp .npmrc www/.npmrc && cp package.json www/package.json",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "back_deploy": "cd www && eb init && chmod +x ../bin/backDeploy.sh && ../bin/backDeploy.sh"
+    "EB_Init": "eb init udagram-server --region us-east-1 --platform \"Node.js 16 running on 64bit Amazon Linux 2\"",
+    "back_deploy": "cd www && npm run EB_Init && chmod +x ../bin/backDeploy.sh && ../bin/backDeploy.sh"
   },
   "keywords": [],
   "author": "Gabriel Ruttner",
