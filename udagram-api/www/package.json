@@ -11,8 +11,8 @@
     "clean": "rm -rf www/ || true",
     "build": "npm run clean && tsc && cp -rf src/config www/config && cp .npmrc www/.npmrc && cp package.json www/package.json",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "EB_Init": "cd www && eb init udagram-server --region us-east-1 --platform \"Node.js 16 running on 64bit Amazon Linux 2\" && eb setenv POSTGRES_USERNAME=$POSTGRES_USERNAME POSTGRES_PASSWORD=$POSTGRES_PASSWORD POSTGRES_DB=$POSTGRES_DB PORT=$PORT DB_PORT=$DB_PORT POSTGRES_HOST=$POSTGRES_HOST AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION URL=$URL AWS_BUCKET=$AWS_BUCKET JWT_SECRET=$JWT_SECRET",
-    "back_deploy": "npm run EB_Init && chmod +x ./bin/backDeploy.sh && ./bin/backDeploy.sh"
+    "EB_Init": "chmod +x ./bin/eb_init.sh && ./bin/eb_init.sh",
+    "back_deploy": "npm run EB_Init && cd www && eb deploy Udagramserver-env"
   },
   "keywords": [],
   "author": "Gabriel Ruttner",
