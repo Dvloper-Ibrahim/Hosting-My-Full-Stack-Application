@@ -92,7 +92,10 @@ jobs:
     steps:
       - node/install
       - checkout
-      - aws-cli/setup
+      - run:
+          name: Install Frontend-Packages
+          command: |
+            npm run install-frontend
       - run:
           name: testing end to end
           command: |
