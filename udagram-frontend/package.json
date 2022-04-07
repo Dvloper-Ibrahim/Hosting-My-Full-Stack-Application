@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "front_deploy": "bash ./bin/frontDeploy.sh"
+    "front_deploy": "chmod +x ./bin/frontDeploy.sh && ./bin/frontDeploy.sh"
   },
   "private": true,
   "dependencies": {
