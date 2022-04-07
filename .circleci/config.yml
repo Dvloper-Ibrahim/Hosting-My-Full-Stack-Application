@@ -61,7 +61,7 @@ jobs:
   #               name: deploy Backend
   #               command: |
   #                 npm run deploy-backend
-  deploy_the_backend:
+  deploy the backend:
     docker:
     # the base image can run most needed actions with orbs
       - image: "cimg/base:stable"
@@ -85,13 +85,14 @@ jobs:
           name: deploy Frontend
           command: |
             npm run deploy-frontend
-  End_To_End_Test:
+  End To End Test:
     docker:
     # the base image can run most needed actions with orbs
       - image: "cimg/base:stable"
     steps:
       - node/install
       - checkout
+      - aws-cli/setup
       - run:
           name: testing end to end
           command: |
@@ -101,12 +102,12 @@ workflows:
   Build_And_Deploy:
     jobs:
       - build
-      - deploy_the_backend:
+      - deploy the backend:
           requires:
             - build
       - deploy the frontend:
           requires:
-            - deploy_the_backend
-      - End_To_End_Test:
+            - deploy the backend
+      - End To End Test:
           requires:
             - deploy the frontend
