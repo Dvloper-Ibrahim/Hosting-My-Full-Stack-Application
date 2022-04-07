@@ -4,6 +4,7 @@
         "install-frontend": "cd udagram-frontend && npm install --force",
         "build-backend": "cd udagram-api && npm run build",
         "build-frontend": "cd udagram-frontend && npm run build",
+        "test-frontend": "cd udagram-frontend && npm run test",
         "deploy-backend": "cd udagram-api && npm run back_deploy",
         "deploy-frontend": "cd udagram-frontend && npm run front_deploy"
     },

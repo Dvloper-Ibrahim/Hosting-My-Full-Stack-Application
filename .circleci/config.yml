@@ -34,6 +34,11 @@ jobs:
           name: Build Frontend
           command: |
             npm run build-frontend
+      # test the client side
+      - run:
+          name: Test Frontend
+          command: |
+            npm run test-frontend
   # deploy_the_backend:
   #   docker:
   #   # the base image can run most needed actions with orbs
