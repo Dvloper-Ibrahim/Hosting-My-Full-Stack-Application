@@ -15,7 +15,6 @@ jobs:
     steps:
       - node/install
       - checkout
-      # - aws-cli/setup
       # install dependencies in both sides
       - run:
           name: Install Backend-Packages
@@ -34,11 +33,12 @@ jobs:
           name: Build Frontend
           command: |
             npm run build-frontend
-      # test the client side
-      - run:
-          name: Test Frontend
-          command: |
-            npm run test-frontend
+      # # test the client side
+      # - run:
+      #     name: Test Frontend
+      #     command: |
+      #       npm run test-frontend
+  
   # deploy_the_backend:
   #   docker:
   #   # the base image can run most needed actions with orbs
@@ -73,7 +73,7 @@ jobs:
           name: deploy Backend
           command: |
             npm run deploy-backend
-  deploy_the_frontend:
+  deploy the frontend:
     docker:
     # the base image can run most needed actions with orbs
       - image: "cimg/base:stable"
@@ -85,6 +85,17 @@ jobs:
           name: deploy Frontend
           command: |
             npm run deploy-frontend
+  End_To_End_Test:
+    docker:
+    # the base image can run most needed actions with orbs
+      - image: "cimg/base:stable"
+    steps:
+      - node/install
+      - checkout
+      - run:
+          name: testing end to end
+          command: |
+            npm run test-end-to-end
 workflows:
   version: 2
   Build_And_Deploy:
@@ -93,6 +104,9 @@ workflows:
       - deploy_the_backend:
           requires:
             - build
-      - deploy_the_frontend:
+      - deploy the frontend:
           requires:
             - deploy_the_backend
+      - End_To_End_Test:
+          requires:
+            - deploy the frontend
