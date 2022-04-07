@@ -106,7 +106,7 @@ jobs:
 
 workflows:
   version: 2
-  Build_And_Deploy:
+  Build & Deploy:
     jobs:
       - build:
           filters:
