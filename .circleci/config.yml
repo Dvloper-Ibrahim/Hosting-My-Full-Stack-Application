@@ -46,18 +46,18 @@ jobs:
           command: |
             npm run deploy-backend
   # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  # deploy the frontend:
-  #   docker:
-  #   # the base image can run most needed actions with orbs
-  #     - image: "cimg/base:stable"
-  #   steps:
-  #     - node/install
-  #     - checkout
-  #     - aws-cli/setup
-  #     - run:
-  #         name: deploy Frontend
-  #         command: |
-  #           npm run deploy-frontend
+  deploy the frontend:
+    docker:
+    # the base image can run most needed actions with orbs
+      - image: "cimg/base:stable"
+    steps:
+      - node/install
+      - checkout
+      - aws-cli/setup
+      - run:
+          name: deploy Frontend
+          command: |
+            npm run deploy-frontend
 
 workflows:
   version: 2
@@ -76,10 +76,10 @@ workflows:
                 - master
           requires:
             - build
-      # - deploy the frontend:
-      #     filters:
-      #       branches:
-      #         only:
-      #           - master
-      #     requires:
-      #       - deploy the backend
+      - deploy the frontend:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - deploy the backend

@@ -12,7 +12,7 @@
     "build": "npm run clean && tsc && cp -rf src/config www/config && cp .npmrc www/.npmrc && cp package.json www/package.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "EB_Init": "chmod +x ./bin/eb_init.sh && ./bin/eb_init.sh",
-    "back_deploy": "npm run EB_Init && bash ./bin/backDeploy.sh"
+    "back_deploy": "npm run EB_Init && bash ./bin/eb_deploy.sh"
   },
   "keywords": [],
   "author": "Gabriel Ruttner",

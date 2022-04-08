@@ -10,14 +10,9 @@ describe('new App', () => {
     beforeEach(() => {
       page.navigateTo('/home');
     });
-    // it('should have a title saying Home', () => {
-    //   page.getPageOneTitleText().then(title => {
-    //     expect(title).toEqual('Home');
-    //   });
-    // });
-    it("should have a title saying Udagram", () => {
+    it('should have a title saying Udagram', () => {
       page.getPageOneTitleText().then((title) => {
-          expect(title).toEqual("Udagram");
+          expect(title).toEqual('Udagram');
       });
     });
   });
