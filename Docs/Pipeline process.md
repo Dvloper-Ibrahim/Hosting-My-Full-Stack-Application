@@ -11,12 +11,10 @@ CircleCi presents them to install common techniques without manual setup. Udagra
 -   `eb: circleci/aws-elastic-beanstalk@2.0.1`
 
 ## Jobs
-### 1. build :
-- It installs node packages and creates the build folder `( www folder )` for the express and angular apps.
-### 2. deploy the backend :
-- It installs node packages and uses the EB CLI to deploy the build of express app.
-### 3. deploy the frontend :
-- It installs node packages and uses the AWS CLI to deploy the build of angular app.
+### 1. deploy the backend :
+- It installs backend packages, builds the express app and uses the EB CLI to deploy the build of the app.
+### 2. deploy the frontend :
+- It installs frontend packages, builds the angular app and uses the AWS CLI to deploy the build of the app.
 
 ## Workflows
 We setup our workflow and organized the jobs to be implemented sequentially as well as on a particular branch of our repository.
