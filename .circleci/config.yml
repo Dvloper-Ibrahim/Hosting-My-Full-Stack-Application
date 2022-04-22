@@ -7,31 +7,31 @@ orbs:
   # different jobs are calles later in the workflows sections
 
 jobs:
-  build:
-    docker:
-    # the base image can run most needed actions with orbs
-      - image: "cimg/base:stable"
-    steps:
-      - node/install
-      - checkout
-      # install dependencies in client and server sides
-      - run:
-          name: Install Backend-Packages
-          command: |
-            npm run install-backend
-      - run:
-          name: Install Frontend-Packages
-          command: |
-            npm run install-frontend
-      # build both client and server sides
-      - run:
-          name: Build Backend
-          command: |
-            npm run build-backend
-      - run:
-          name: Build Frontend
-          command: |
-            npm run build-frontend
+  # build:
+  #   docker:
+  #   # the base image can run most needed actions with orbs
+  #     - image: "cimg/base:stable"
+  #   steps:
+  #     - node/install
+  #     - checkout
+  #     # install dependencies in client and server sides
+  #     - run:
+  #         name: Install Backend-Packages
+  #         command: |
+  #           npm run install-backend
+  #     - run:
+  #         name: Install Frontend-Packages
+  #         command: |
+  #           npm run install-frontend
+  #     # build both client and server sides
+  #     - run:
+  #         name: Build Backend
+  #         command: |
+  #           npm run build-backend
+  #     - run:
+  #         name: Build Frontend
+  #         command: |
+  #           npm run build-frontend
   # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   deploy the backend:
     docker:
@@ -46,19 +46,19 @@ jobs:
           name: Install Backend-Packages
           command: |
             npm run install-backend
-      - run:
-          name: Install Frontend-Packages
-          command: |
-            npm run install-frontend
+      # - run:
+      #     name: Install Frontend-Packages
+      #     command: |
+      #       npm run install-frontend
       # build both client and server sides
       - run:
           name: Build Backend
           command: |
             npm run build-backend
-      - run:
-          name: Build Frontend
-          command: |
-            npm run build-frontend
+      # - run:
+      #     name: Build Frontend
+      #     command: |
+      #       npm run build-frontend
       # deploy the backend
       - run:
           name: deploy Backend
@@ -74,19 +74,19 @@ jobs:
       - checkout
       - aws-cli/setup
       # install dependencies in client and server sides
-      - run:
-          name: Install Backend-Packages
-          command: |
-            npm run install-backend
+      # - run:
+      #     name: Install Backend-Packages
+      #     command: |
+      #       npm run install-backend
       - run:
           name: Install Frontend-Packages
           command: |
             npm run install-frontend
       # build both client and server sides
-      - run:
-          name: Build Backend
-          command: |
-            npm run build-backend
+      # - run:
+      #     name: Build Backend
+      #     command: |
+      #       npm run build-backend
       - run:
           name: Build Frontend
           command: |
@@ -102,18 +102,18 @@ workflows:
   Build & Deploy:
     jobs:
       # every job will run if there's a commit on the branch specified for it
-      - build:
-          filters:
-            branches:
-              only:
-                - master
+      # - build:
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
       - deploy the backend:
           filters:
             branches:
               only:
                 - master
-          requires:
-            - build
+          # requires:
+          #   - build
       - deploy the frontend:
           filters:
             branches:
