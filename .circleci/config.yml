@@ -41,6 +41,25 @@ jobs:
       - node/install
       - checkout
       - eb/setup
+      # install dependencies in client and server sides
+      - run:
+          name: Install Backend-Packages
+          command: |
+            npm run install-backend
+      - run:
+          name: Install Frontend-Packages
+          command: |
+            npm run install-frontend
+      # build both client and server sides
+      - run:
+          name: Build Backend
+          command: |
+            npm run build-backend
+      - run:
+          name: Build Frontend
+          command: |
+            npm run build-frontend
+      # deploy the backend
       - run:
           name: deploy Backend
           command: |
@@ -54,6 +73,25 @@ jobs:
       - node/install
       - checkout
       - aws-cli/setup
+      # install dependencies in client and server sides
+      - run:
+          name: Install Backend-Packages
+          command: |
+            npm run install-backend
+      - run:
+          name: Install Frontend-Packages
+          command: |
+            npm run install-frontend
+      # build both client and server sides
+      - run:
+          name: Build Backend
+          command: |
+            npm run build-backend
+      - run:
+          name: Build Frontend
+          command: |
+            npm run build-frontend
+      # deploy the frontend
       - run:
           name: deploy Frontend
           command: |
